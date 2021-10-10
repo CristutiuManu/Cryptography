@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Security.Cryptography;
 
 namespace CifrulLuiCezar
@@ -6,13 +7,7 @@ namespace CifrulLuiCezar
     {
         public static string Encipher(string inputText, int key)
         {
-            string output = string.Empty;
-            foreach (char c in inputText)
-            {
-                output += Cipher(c, key);
-            }
-            
-            return output;
+            return inputText.Aggregate(string.Empty, (current, c) => current + Cipher(c, key));
         }
 
         public static string Decipher(string input, int key)
